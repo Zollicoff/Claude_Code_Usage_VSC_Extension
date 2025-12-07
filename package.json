@@ -21,23 +21,56 @@
     "tokens"
   ],
   "activationEvents": [
-    "onCommand:claude-code-usage.showDashboard",
-    "onCommand:claude-code-usage.refreshData"
+    "onView:claudeCodeUsage"
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claude-code-usage",
+          "title": "Claude Code Usage",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "claude-code-usage": [
+        {
+          "id": "claudeCodeUsage",
+          "name": "Usage Overview",
+          "type": "webview"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "claude-code-usage.showDashboard",
         "title": "Show Usage Dashboard",
-        "category": "Claude Code"
+        "category": "Claude Code",
+        "icon": "$(graph)"
       },
       {
         "command": "claude-code-usage.refreshData",
         "title": "Refresh Usage Data",
-        "category": "Claude Code"
+        "category": "Claude Code",
+        "icon": "$(refresh)"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "claude-code-usage.showDashboard",
+          "when": "view == claudeCodeUsage",
+          "group": "navigation"
+        },
+        {
+          "command": "claude-code-usage.refreshData",
+          "when": "view == claudeCodeUsage",
+          "group": "navigation"
+        }
+      ]
+    },
     "keybindings": [
       {
         "command": "claude-code-usage.showDashboard",

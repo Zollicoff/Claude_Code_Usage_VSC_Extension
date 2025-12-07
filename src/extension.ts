@@ -5,9 +5,19 @@
 
 import * as vscode from 'vscode';
 import { DashboardPanel } from './webview/dashboardPanel';
+import { SidebarProvider } from './webview/sidebarProvider';
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('Claude Code Usage extension is now active');
+
+  // Register sidebar webview provider
+  const sidebarProvider = new SidebarProvider(context.extensionUri);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      SidebarProvider.viewType,
+      sidebarProvider
+    )
+  );
 
   // Register command to show the dashboard
   const showDashboardCommand = vscode.commands.registerCommand(
@@ -22,6 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
     'claude-code-usage.refreshData',
     () => {
       DashboardPanel.refresh();
+      sidebarProvider.refresh();
       vscode.window.showInformationMessage('Claude Code usage data refreshed');
     }
   );
