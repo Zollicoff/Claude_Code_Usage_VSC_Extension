@@ -1,6 +1,6 @@
-# Claude Code Usage
+# Claude Code CLI Usage
 
-A Visual Studio Code extension that tracks and displays your Claude Code usage statistics, costs, and analytics directly within VS Code.
+A Visual Studio Code extension that tracks and displays your Claude Code CLI usage statistics, costs, and analytics directly within VS Code.
 
 ## Features
 
